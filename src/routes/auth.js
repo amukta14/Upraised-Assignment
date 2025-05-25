@@ -46,7 +46,8 @@ router.post('/register',
         token
       });
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+      console.error('Register error:', error);
+      res.status(500).json({ error: 'Server error', details: error.message });
     }
   }
 );
@@ -91,7 +92,8 @@ router.post('/login',
         token
       });
     } catch (error) {
-      res.status(500).json({ error: 'Server error' });
+      console.error('Login error:', error);
+      res.status(500).json({ error: 'Server error', details: error.message });
     }
   }
 );

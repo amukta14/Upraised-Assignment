@@ -1,15 +1,15 @@
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-const sequelize = new Sequelize('postgresql://imf_gadget_db_91u3_user:MeXnGhLuXHrQ7XIDoO4gtbaJNR15ikWo@dpg-d0pkr0re5dus73dumn10-a/imf_gadget_db_91u3', {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: 'postgres',
   dialectOptions: {
-    ssl: {
+    ssl: process.env.NODE_ENV === 'production' ? {
       require: true,
       rejectUnauthorized: false
-    }
+    } : false
   },
-  logging: process.env.NODE_ENV === 'development' ? console.log : false,
+  logging: process.env.NODE_ENV === 'production' ? false : console.log,
   pool: {
     max: 5,
     min: 0,
